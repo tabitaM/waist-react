@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { firebaseConfig } from '../firebaseConfig'
-
-firebase.initializeApp(firebaseConfig)
 
 export default function Login() {
+  const navigate = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -41,6 +40,7 @@ export default function Login() {
         <button
           onClick={() => {
             firebase.auth().createUserWithEmailAndPassword(email, password)
+            navigate.push('/dashboard')
           }}
         >
           Login
@@ -51,6 +51,7 @@ export default function Login() {
           onClick={() => {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
             firebase.auth().signInWithPopup(googleAuthProvider)
+            navigate.push('/dashboard')
           }}
         >
           Sign In with Google

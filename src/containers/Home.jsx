@@ -5,7 +5,7 @@ export default function Home() {
   const navigate = useHistory()
   return (
     <div>
-      <h1>Welcome home!</h1>
+      <h1>Home page</h1>
       <button onClick={() => navigate.push('/login')}>Login</button>
     </div>
   )
