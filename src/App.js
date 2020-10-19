@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from './containers/Login'
-import Dashboard from '../src/components/Dashboard'
+import Dashboard from './containers/Dashboard'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 export default function App() {
