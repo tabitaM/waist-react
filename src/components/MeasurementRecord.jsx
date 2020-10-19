@@ -7,6 +7,10 @@ export default function MeasurementRecord({ waist, bicep, chest, weight }) {
       <div> Bicep: {bicep}</div>
       <div> Chest: {chest}</div>
       <div> Weight: {weight}</div>
+      <div>
+        <button onClick={() => {}}>Edit</button>
+        <button onClick={() => {}}>Delete</button>
+      </div>
     </div>
   )
 }

@@ -48,9 +48,9 @@ export default function Login() {
       </div>
       <div>
         <button
-          onClick={() => {
+          onClick={async () => {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
-            firebase.auth().signInWithPopup(googleAuthProvider)
+            await firebase.auth().signInWithPopup(googleAuthProvider)
             navigate.push('/dashboard')
           }}
         >

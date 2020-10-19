@@ -83,11 +83,6 @@ export default function MeasurementForm() {
       </div>
 
       <div>
-        <button onClick={() => {}}>Edit</button>
-        <button onClick={() => {}}>Delete</button>
-      </div>
-
-      <div>
         <button
           onClick={() => {
             firebase.auth().signOut()
