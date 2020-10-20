@@ -7,7 +7,6 @@ export default function MeasurementRecord({
   bicep,
   chest,
   weight,
-  setMeasurements,
 }) {
   const [editable, setEditable] = useState(false)
   const waistRef = useRef(null)
