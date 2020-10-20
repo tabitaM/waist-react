@@ -9,7 +9,7 @@ export default function MeasurementList() {
     firebaseDb.on('value', (snapshot) => {
       let allData = []
       snapshot.forEach((snap) => {
-        allData.push(snap.val())
+        allData.push({ key: snap.key, ...snap.val() })
       })
       setMeasurements(allData)
     })
@@ -18,10 +18,12 @@ export default function MeasurementList() {
   return measurements.map((measurement) => (
     <MeasurementRecord
       key={measurements.indexOf(measurement)}
+      recordKey={measurement.key}
       waist={measurement.waist}
       bicep={measurement.bicep}
       chest={measurement.chest}
       weight={measurement.weight}
+      setMeasurements={setMeasurements}
     />
   ))
 }
