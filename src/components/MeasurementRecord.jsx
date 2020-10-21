@@ -30,6 +30,11 @@ export default function MeasurementRecord({
     })
   }
 
+  const deleteMeasurement = () => {
+    const measurement = firebase.database().ref(recordKey)
+    measurement.remove()
+  }
+
   return (
     <div style={{ display: 'flex' }}>
       <div> Key: {recordKey}</div>
@@ -39,7 +44,7 @@ export default function MeasurementRecord({
       <div> Weight: {weight}</div>
       <div>
         <button onClick={() => setEditable(true)}>Edit</button>
-        <button onClick={() => {}}>Delete</button>
+        <button onClick={deleteMeasurement}>Delete</button>
       </div>
       {editable && (
         <div>
