@@ -15,10 +15,10 @@ export default function MeasurementForm() {
 
     if (name === 'waist') {
       setMesurement({ ...measurement, waist: value })
-    } else if (name === 'chest') {
-      setMesurement({ ...measurement, chest: value })
     } else if (name === 'bicep') {
       setMesurement({ ...measurement, bicep: value })
+    } else if (name === 'chest') {
+      setMesurement({ ...measurement, chest: value })
     } else if (name === 'weight') {
       setMesurement({ ...measurement, weight: value })
     }
@@ -27,8 +27,8 @@ export default function MeasurementForm() {
   function addMeasurement() {
     firebaseDb.push({
       waist: measurement.waist,
-      chest: measurement.chest,
       bicep: measurement.bicep,
+      chest: measurement.chest,
       weight: measurement.weight,
     })
 
@@ -52,18 +52,18 @@ export default function MeasurementForm() {
       <div>
         <input
           type="text"
-          placeholder="chest"
-          name="chest"
-          value={measurement.chest}
+          placeholder="bicep"
+          name="bicep"
+          value={measurement.bicep}
           onChange={(event) => onChangeHandler(event)}
         />
       </div>
       <div>
         <input
           type="text"
-          placeholder="bicep"
-          name="bicep"
-          value={measurement.bicep}
+          placeholder="chest"
+          name="chest"
+          value={measurement.chest}
           onChange={(event) => onChangeHandler(event)}
         />
       </div>

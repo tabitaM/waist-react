@@ -32,7 +32,8 @@ export default function MeasurementRecord({
 
   const deleteMeasurement = () => {
     const measurement = firebase.database().ref(recordKey)
-    measurement.remove()
+    if (window.confirm('Are you sure you want to delete this record?'))
+      measurement.remove()
   }
 
   return (
