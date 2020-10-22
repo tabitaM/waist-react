@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import firebase from 'firebase/app'
+import date from '../utils/utils'
 
 export default function MeasurementRecord({
   recordKey,
@@ -43,6 +44,7 @@ export default function MeasurementRecord({
       <div> Bicep: {bicep}</div>
       <div> Chest: {chest}</div>
       <div> Weight: {weight}</div>
+      <div> Date: {date()} </div>
       <div>
         <button onClick={() => setEditable(true)}>Edit</button>
         <button onClick={deleteMeasurement}>Delete</button>
