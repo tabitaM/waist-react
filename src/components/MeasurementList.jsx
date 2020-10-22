@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import firebaseDb from '../firebaseConfig'
+import React from 'react'
 import MeasurementRecord from './MeasurementRecord'
+import useFetch from '../service/useFetch'
 
 export default function MeasurementList() {
-  const [measurements, setMeasurements] = useState([])
-
-  useEffect(() => {
-    firebaseDb.on('value', (snapshot) => {
-      let allData = []
-      snapshot.forEach((snap) => {
-        allData.push({ key: snap.key, ...snap.val() })
-      })
-      setMeasurements(allData)
-    })
-  }, [])
+  const { measurements } = useFetch()
 
   return measurements.map((measurement) => (
     <MeasurementRecord
@@ -23,6 +13,7 @@ export default function MeasurementList() {
       bicep={measurement.bicep}
       chest={measurement.chest}
       weight={measurement.weight}
+      measurementsList={measurements}
     />
   ))
 }

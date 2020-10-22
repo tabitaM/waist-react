@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import firebase from 'firebase/app'
 import firebaseDb from '../firebaseConfig'
+import date from '../utils/utils'
+import useFetch from '../service/useFetch'
 
 export default function MeasurementForm() {
   const [measurement, setMesurement] = useState({
@@ -9,6 +11,8 @@ export default function MeasurementForm() {
     bicep: '',
     weight: '',
   })
+
+  const { isTodayAlreadyMeasured } = useFetch()
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget
@@ -25,11 +29,16 @@ export default function MeasurementForm() {
   }
 
   function addMeasurement() {
+    if (isTodayAlreadyMeasured()) {
+      window.alert('You already set a measurement for today!')
+      return
+    }
     firebaseDb.push({
       waist: measurement.waist,
       bicep: measurement.bicep,
       chest: measurement.chest,
       weight: measurement.weight,
+      date: date(),
     })
 
     // reset input
