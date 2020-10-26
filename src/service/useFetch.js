@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react'
 import firebaseDb from '../firebaseConfig'
 import date from '../utils/utils'
+import firebase, { auth } from 'firebase/app'
 
 export default function useFetch() {
   const [measurements, setMeasurements] = useState([])
 
   useEffect(() => {
-    firebaseDb.on('value', (snapshot) => {
-      let allData = []
-      snapshot.forEach((snap) => {
-        allData.push({ key: snap.key, ...snap.val() })
+    firebase
+      .database()
+      .ref(`${auth().currentUser.uid}`)
+      .on('value', (snapshot) => {
+        let allData = []
+        snapshot.forEach((snap) => {
+          allData.push({ key: snap.key, ...snap.val() })
+        })
+        setMeasurements(allData)
       })
-      setMeasurements(allData)
-    })
   }, [])
 
   const isTodayAlreadyMeasured = () => {

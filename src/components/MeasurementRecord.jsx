@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import firebase from 'firebase/app'
+import firebase, { auth } from 'firebase/app'
 import date from '../utils/utils'
 
 export default function MeasurementRecord({
@@ -10,6 +10,8 @@ export default function MeasurementRecord({
   weight,
   measurementsList,
 }) {
+  console.log('User: ', auth().currentUser.uid)
+  console.log('List: ', measurementsList)
   const [editable, setEditable] = useState(false)
   const waistRef = useRef(null)
   const bicepRef = useRef(null)
@@ -21,7 +23,9 @@ export default function MeasurementRecord({
     setEditable(false)
 
     // get measurement from firebase db
-    const measurement = firebase.database().ref(recordKey)
+    const measurement = firebase
+      .database()
+      .ref(`/${auth().currentUser.uid}/${recordKey}`)
 
     // update measurement in firebase db
     measurement.update({
@@ -33,13 +37,16 @@ export default function MeasurementRecord({
   }
 
   const deleteMeasurement = () => {
-    const measurement = firebase.database().ref(recordKey)
+    const measurement = firebase
+      .database()
+      .ref(`/${auth().currentUser.uid}/${recordKey}`)
     if (window.confirm('Are you sure you want to delete this record?'))
       measurement.remove()
   }
 
   return (
     <div style={{ display: 'flex' }}>
+      <div> User: {auth().currentUser.displayName} </div>
       <div> Key: {recordKey}</div>
       <div> Waist: {waist}</div>
       <div> Bicep: {bicep}</div>

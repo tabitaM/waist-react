@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import firebase from 'firebase/app'
-import firebaseDb from '../firebaseConfig'
+import firebase, { auth } from 'firebase/app'
 import date from '../utils/utils'
 import useFetch from '../service/useFetch'
+import { useHistory } from 'react-router-dom'
 
 export default function MeasurementForm() {
   const [measurement, setMesurement] = useState({
@@ -13,6 +13,7 @@ export default function MeasurementForm() {
   })
 
   const { isTodayAlreadyMeasured } = useFetch()
+  const navigate = useHistory()
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget
@@ -33,7 +34,7 @@ export default function MeasurementForm() {
       window.alert('You already set a measurement for today!')
       return
     }
-    firebaseDb.push({
+    firebase.database().ref(`/${auth().currentUser.uid}`).push({
       waist: measurement.waist,
       bicep: measurement.bicep,
       chest: measurement.chest,
@@ -95,6 +96,7 @@ export default function MeasurementForm() {
         <button
           onClick={() => {
             firebase.auth().signOut()
+            navigate.push('')
             console.log('Logged out')
           }}
         >
