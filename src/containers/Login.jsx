@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase, { auth } from 'firebase/app'
 
 export default function Login() {
   const navigate = useHistory()
