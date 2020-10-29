@@ -13,6 +13,7 @@ export default function MeasurementList() {
       bicep={measurement.bicep}
       chest={measurement.chest}
       weight={measurement.weight}
+      date={measurement.date}
       measurementsList={measurements}
     />
   ))
