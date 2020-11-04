@@ -96,6 +96,7 @@ export default function MeasurementForm() {
         <button
           onClick={() => {
             firebase.auth().signOut()
+            localStorage.removeItem('user')
             navigate.push('')
             console.log('Logged out')
           }}

@@ -10,8 +10,6 @@ export default function MeasurementRecord({
   date,
   measurementsList,
 }) {
-  console.log('User: ', auth.currentUser.uid)
-  console.log('List: ', measurementsList)
   const [editable, setEditable] = useState(false)
   const waistRef = useRef(null)
   const bicepRef = useRef(null)
@@ -42,7 +40,6 @@ export default function MeasurementRecord({
 
   return (
     <div style={{ display: 'flex' }}>
-      <div> User: {auth.currentUser.displayName} </div>
       <div> Key: {recordKey}</div>
       <div> Waist: {waist}</div>
       <div> Bicep: {bicep}</div>
