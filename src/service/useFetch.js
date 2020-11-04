@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { firebaseDB, auth } from '../firebaseConfig'
+import { firebaseDB } from '../firebaseConfig'
 import date from '../utils/utils'
 
 export default function useFetch() {
   const [measurements, setMeasurements] = useState([])
 
   useEffect(() => {
-    firebaseDB.ref(`${auth.currentUser.uid}`).on('value', (snapshot) => {
+    const user = localStorage.getItem('user')
+    firebaseDB.ref(`${user}`).on('value', (snapshot) => {
       let allData = []
       snapshot.forEach((snap) => {
         allData.push({ key: snap.key, ...snap.val() })
