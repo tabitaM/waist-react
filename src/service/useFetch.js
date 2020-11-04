@@ -12,7 +12,7 @@ export default function useFetch() {
       snapshot.forEach((snap) => {
         allData.push({ key: snap.key, ...snap.val() })
       })
-      setMeasurements(allData)
+      setMeasurements(allData.reverse())
     })
   }, [])
 
@@ -21,7 +21,7 @@ export default function useFetch() {
       return false
     }
 
-    if (measurements[measurements.length - 1].date === date()) {
+    if (measurements[0].date === date()) {
       console.log('Current date already measured: ', measurements[0].date)
       return true
     }
