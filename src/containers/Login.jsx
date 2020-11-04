@@ -38,7 +38,7 @@ export default function Login() {
       <div>
         <button
           onClick={async () => {
-            await auth.createUserWithEmailAndPassword(email, password)
+            await auth.signInWithEmailAndPassword(email, password)
             localStorage.setItem('user', auth.currentUser.uid)
             navigate.push('/dashboard')
           }}
@@ -55,6 +55,17 @@ export default function Login() {
           }}
         >
           Sign In with Google
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={async () => {
+            await auth.createUserWithEmailAndPassword(email, password)
+            localStorage.setItem('user', auth.currentUser.uid)
+            navigate.push('/dashboard')
+          }}
+        >
+          Sign up
         </button>
       </div>
     </div>
