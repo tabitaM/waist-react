@@ -17,12 +17,22 @@ export default function Login() {
     }
   }
 
+  const isEmailOrPasswordWrong = () => {
+    if (!email || !password) {
+      window.alert('Email or password cannot be empty!')
+      setEmail('')
+      setPassword('')
+      return true
+    }
+    return false
+  }
+
   return (
     <div>
       <div>
         <input
           type="text"
-          placeholder="username"
+          placeholder="email"
           name="email"
           onChange={(event) => onChangeHandler(event)}
         />
@@ -38,6 +48,7 @@ export default function Login() {
       <div>
         <button
           onClick={async () => {
+            if (isEmailOrPasswordWrong()) return
             await auth.signInWithEmailAndPassword(email, password)
             localStorage.setItem('user', auth.currentUser.uid)
             navigate.push('/dashboard')

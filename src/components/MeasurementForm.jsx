@@ -30,10 +30,32 @@ export default function MeasurementForm() {
   }
 
   function addMeasurement() {
+    //VALIDATIONS
+    if (
+      isNaN(measurement.waist) ||
+      isNaN(measurement.bicep) ||
+      isNaN(measurement.chest) ||
+      isNaN(measurement.weight)
+    ) {
+      window.alert('Wrong measurement! ')
+      setMesurement({ waist: '', chest: '', bicep: '', weight: '' })
+      return
+    }
+    if (
+      !measurement.waist ||
+      !measurement.bicep ||
+      !measurement.chest ||
+      !measurement.weight
+    ) {
+      window.alert('Field cannot be empty! ')
+      setMesurement({ waist: '', chest: '', bicep: '', weight: '' })
+      return
+    }
     if (isTodayAlreadyMeasured()) {
       window.alert('You already set a measurement for today!')
       return
     }
+
     firebase.database().ref(`/${auth().currentUser.uid}`).push({
       waist: measurement.waist,
       bicep: measurement.bicep,
@@ -49,7 +71,6 @@ export default function MeasurementForm() {
   return (
     <div>
       <h1> Dashboard page</h1>
-      <h4>bicep: {measurement.bicep}</h4>
       <div>
         <input
           type="text"
@@ -58,6 +79,7 @@ export default function MeasurementForm() {
           value={measurement.waist}
           onChange={(event) => onChangeHandler(event)}
         />
+        {isNaN(measurement.waist) ? 'not a number' : ''}
       </div>
       <div>
         <input
@@ -67,6 +89,7 @@ export default function MeasurementForm() {
           value={measurement.bicep}
           onChange={(event) => onChangeHandler(event)}
         />
+        {isNaN(measurement.bicep) ? 'not a number' : ''}
       </div>
       <div>
         <input
@@ -76,6 +99,7 @@ export default function MeasurementForm() {
           value={measurement.chest}
           onChange={(event) => onChangeHandler(event)}
         />
+        {isNaN(measurement.chest) ? 'not a number' : ''}
       </div>
       <div>
         <input
@@ -85,6 +109,7 @@ export default function MeasurementForm() {
           value={measurement.weight}
           onChange={(event) => onChangeHandler(event)}
         />
+        {isNaN(measurement.weight) ? 'not a number' : ''}
       </div>
       <div>
         <button type="submit" onClick={addMeasurement}>
