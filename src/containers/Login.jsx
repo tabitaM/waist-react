@@ -6,14 +6,17 @@ import { auth, googleProvider } from '../firebaseConfig'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import Modal from 'react-bootstrap/Modal'
 
 export default function Login() {
   const navigate = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  console.log('email: ', email, 'password: ', password)
+
+  //Modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget
@@ -85,20 +88,53 @@ export default function Login() {
                 Log In with Google
               </LoginButton>
               <Text>Not a member?</Text>
-              <SingUpLink
-                variant="link"
-                onClick={async () => {
-                  await auth.createUserWithEmailAndPassword(email, password)
-                  localStorage.setItem('user', auth.currentUser.uid)
-                  navigate.push('/dashboard')
-                }}
-              >
+              <SingUpLink variant="link" onClick={handleShow}>
                 Sign up
               </SingUpLink>
             </Form>
           </CardBody>
         </CardContainer>
       </LoginContainer>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>SIGN UP</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form style={{ width: '100%' }}>
+            <Input
+              type="text"
+              placeholder="email"
+              name="email"
+              value={email}
+              onChange={(event) => onChangeHandler(event)}
+            />
+            <Input
+              type="password"
+              placeholder="password"
+              name="password"
+              value={password}
+              onChange={(event) => onChangeHandler(event)}
+            />
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button
+            variant="light"
+            onClick={async () => {
+              handleShow()
+              await auth.createUserWithEmailAndPassword(email, password)
+              localStorage.setItem('user', auth.currentUser.uid)
+              navigate.push('/dashboard')
+            }}
+          >
+            Sign Up
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </ContainerWrapper>
   )
 }
