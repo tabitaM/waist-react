@@ -58,6 +58,7 @@ export default function MeasurementForm() {
     }
     if (isTodayAlreadyMeasured()) {
       window.alert('You already set a measurement for today!')
+      setMesurement({ waist: '', chest: '', bicep: '', weight: '' })
       return
     }
 
@@ -176,4 +177,5 @@ const InputData = styled(FormControl)`
 const AddMeasurementButton = styled(Button)`
   border-color: #f3591e;
   background-color: #f3591e;
+  margin-bottom: 1em;
 `
