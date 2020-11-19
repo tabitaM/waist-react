@@ -3,6 +3,7 @@ import { auth, firebaseDB } from '../firebaseConfig'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import styled from 'styled-components'
+import FormControl from 'react-bootstrap/FormControl'
 
 export default function MeasurementRecord({
   recordKey,
@@ -85,20 +86,44 @@ export default function MeasurementRecord({
       </div>
       {editable && (
         <div>
-          <input ref={waistRef} placeholder={waist}></input>
-          <input ref={bicepRef} placeholder={bicep}></input>
-          <input ref={chestRef} placeholder={chest}></input>
-          <input ref={weightRef} placeholder={weight}></input>
-          <button onClick={updateMeasurement}>Apply</button>
-          <button onClick={() => setEditable(false)}>Cancel</button>
+          <EditSection>
+            <InputData ref={waistRef} placeholder={waist} />
+            <InputData ref={bicepRef} placeholder={bicep} />
+            <InputData ref={chestRef} placeholder={chest} />
+            <InputData ref={weightRef} placeholder={weight} />{' '}
+          </EditSection>
+          <EditButton variant="light" onClick={updateMeasurement}>
+            Apply
+          </EditButton>
+          <EditButton variant="light" onClick={() => setEditable(false)}>
+            Cancel
+          </EditButton>
         </div>
       )}
     </Wrapper>
   )
 }
 
+const EditButton = styled(Button)`
+  background-color: #65656b;
+  border-color: #65656b;
+  width: fit-content;
+  height: 30px;
+  font-size: 12px;
+  margin-top: 10px;
+`
+
 const Wrapper = styled(Container)`
   display: flex;
+`
+
+const EditSection = styled.div`
+  display: flex;
+`
+
+const InputData = styled(FormControl)`
+  width: 7%;
+  margin-right: 5px;
 `
 
 const Icon = styled.svg`

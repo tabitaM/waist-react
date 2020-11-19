@@ -162,6 +162,7 @@ const LogoutButton = styled(Button)`
   right: 40px;
   background-color: #65656b;
   border-color: #65656b;
+  position: fixed;
 `
 
 const Input = styled(InputGroup)`
