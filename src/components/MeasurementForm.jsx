@@ -76,8 +76,7 @@ export default function MeasurementForm() {
 
   return (
     <ContainerWrapper>
-      <Title> your measurements.</Title>
-      <div>
+      <AddMeasurementSection>
         <Input>
           <InputData
             type="text"
@@ -129,7 +128,7 @@ export default function MeasurementForm() {
         >
           Add measure
         </AddMeasurementButton>
-      </div>
+      </AddMeasurementSection>
 
       <div>
         <LogoutButton
@@ -150,10 +149,8 @@ export default function MeasurementForm() {
 
 const ContainerWrapper = styled(Container)``
 
-const Title = styled.p`
-  text-align: center;
-  font-size: 25px;
-  margin: 70px 0 100px 0;
+const AddMeasurementSection = styled.div`
+  margin: 2em 0 0 5em;
 `
 
 const LogoutButton = styled(Button)`
@@ -166,9 +163,8 @@ const LogoutButton = styled(Button)`
 `
 
 const Input = styled(InputGroup)`
-  width: 20%;
+  width: 40%;
   margin-bottom: 1em;
-  margin-left: -3em;
 `
 const InputData = styled(FormControl)`
   background-color: #9999a0;
@@ -178,5 +174,5 @@ const InputData = styled(FormControl)`
 const AddMeasurementButton = styled(Button)`
   border-color: #f3591e;
   background-color: #f3591e;
-  margin-bottom: 1em;
+  margin-left: 2em;
 `

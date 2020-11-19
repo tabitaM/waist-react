@@ -122,7 +122,7 @@ const EditSection = styled.div`
 `
 
 const InputData = styled(FormControl)`
-  width: 7%;
+  width: 10%;
   margin-right: 5px;
 `
 
